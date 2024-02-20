@@ -37,7 +37,7 @@ def main():
     # browser.implicitly_wait(200)
     
     
-    for page_no in range(13):
+    for page_no in range(4):
         # if page_no > 0: break
         try:            
             starturl = f"https://ranking.rakuten.co.jp/weekly/p={page_no + 1}"
@@ -51,7 +51,7 @@ def main():
         for item_no in range(80):
             rank_no = rank_no + 1
             
-            if rank_no > 1000: 
+            if rank_no > 300: 
                 break
             
             if page_no == 0 and item_no >= 20:
@@ -78,6 +78,11 @@ def main():
             except Exception as e:
                 print({e})
     browser.quit()
+    
+    with pd.ExcelWriter(f'rakuten.xlsx', engine='openpyxl') as writer:
+        my_dataset.to_excel(writer, sheet_name='Sheet1', encoding='utf-8', index=False)    
+        
+    
     
     # Generating overall genre    
     cou = 0
@@ -120,13 +125,13 @@ def main():
             
             sub_browser.quit()
                 
-            with pd.ExcelWriter(f'{current_date}.xlsx', engine='openpyxl') as writer:
-                my_dataset.to_excel(writer, sheet_name='Sheet1', encoding='utf-8', index=False)    
-                
         except Exception as e:
             pass
         finally:
             pass
+        
+    with pd.ExcelWriter(f'rakuten.xlsx', engine='openpyxl') as writer:
+        my_dataset.to_excel(writer, sheet_name='Sheet1', encoding='utf-8', index=False)    
         
     
             
@@ -176,7 +181,7 @@ if __name__ == "__main__":
         
         implement_wait(str(entry.get()), str(combo.get()))
         # window.update_idletasks()
-        window.after(3000, update)
+        window.after(30000, update)
 
     update()
 
