@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 from selenium.common.exceptions import TimeoutException
 import validators
-import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter.ttk import Progressbar
@@ -134,8 +133,6 @@ def main():
 def implement_wait(time, day_of_week):
     current_date = datetime.now().strftime('%H-%M')
     
-    # print(day_of_week.strip() + " ----- " + date[datetime.now().weekday()] )
-    # print( time.strip() + " ----- " + current_date )
     
     if date[datetime.now().weekday()] == day_of_week.strip() and  current_date == time.strip():
         
